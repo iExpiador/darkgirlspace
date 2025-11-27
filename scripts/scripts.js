@@ -91,44 +91,45 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function Feather(i) {
-    var size = Math.random() * 50 + 10;
-    var geometry = new THREE.PlaneGeometry(size, size, 3);
-    var material = new THREE.MeshLambertMaterial({
-      side: THREE.DoubleSide,
-      map: featherTexture,     // desactivado para ver el color real
-      transparent: true,
-      color: (i % 2 === 0) ? new THREE.Color("#c0c0c0") : new THREE.Color("#000000"),
-      alphaTest: 0.8,
-    });
-    var feather = new THREE.Mesh(geometry, material);
-    feather.opts = {};
+  var size = Math.random() * 50 + 10;
+  var geometry = new THREE.PlaneGeometry(size, size, 3);
+  var material = new THREE.MeshLambertMaterial({
+    side: THREE.DoubleSide,
+    map: featherTexture,
+    transparent: true,
+    color: (i % 2 === 0) ? new THREE.Color("#c0c0c0") : new THREE.Color("#000000"),
+    alphaTest: 0.8,
+    blending: THREE.MultiplyBlending // AÑADIR ESTA LÍNEA
+  });
+  var feather = new THREE.Mesh(geometry, material);
+  feather.opts = {};
 
-    feather.opts.position = {
-      x: (Math.random() - 0.5) * 600,
-      y: Math.random() * 400 + 100,  // antes 200 → más altura + 100 de offset
-      z: (Math.random() - 0.5) * 600,
-    };
+  feather.opts.position = {
+    x: (Math.random() - 0.5) * 600,
+    y: Math.random() * 400 + 100,
+    z: (Math.random() - 0.5) * 600,
+  };
 
-    feather.opts.rotation = {
-      x: Math.random() * (Math.PI * 2),
-      y: Math.random() * (Math.PI * 2),
-      z: Math.random() * (Math.PI * 2),
-    };
+  feather.opts.rotation = {
+    x: Math.random() * (Math.PI * 2),
+    y: Math.random() * (Math.PI * 2),
+    z: Math.random() * (Math.PI * 2),
+  };
 
-    feather.opts.speed = {
-      x: Math.random() - 0.5,
-      y: -Math.random(),
-      z: Math.random() - 0.5,
-      rx: (Math.random() - 0.5) / 50,
-      ry: (Math.random() - 0.5) / 50,
-      rz: (Math.random() - 0.5) / 50,
-    };
+  feather.opts.speed = {
+    x: Math.random() - 0.5,
+    y: -Math.random(),
+    z: Math.random() - 0.5,
+    rx: (Math.random() - 0.5) / 50,
+    ry: (Math.random() - 0.5) / 50,
+    rz: (Math.random() - 0.5) / 50,
+  };
 
-    feather.position.set(feather.opts.position.x, feather.opts.position.y, feather.opts.position.z);
-    feather.rotation.set(feather.opts.rotation.x, feather.opts.rotation.y, feather.opts.rotation.z);
+  feather.position.set(feather.opts.position.x, feather.opts.position.y, feather.opts.position.z);
+  feather.rotation.set(feather.opts.rotation.x, feather.opts.rotation.y, feather.opts.rotation.z);
 
-    return feather;
-  }
+  return feather;
+}
 
   var position = 0;
   var render = function (a) {
@@ -196,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   });
 });
+
 
 
 
