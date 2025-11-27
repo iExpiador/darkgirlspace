@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       side: THREE.DoubleSide,
       map: featherTexture,     // desactivado para ver el color real
       transparent: true,
-      color: (i % 2 === 0) ? new THREE.Color("#000000") : new THREE.Color("#c0c0c0"),
+      color: (i % 2 === 0) ? new THREE.Color("#c0c0c0") : new THREE.Color("#000000"),
       alphaTest: 0.8,
     });
     var feather = new THREE.Mesh(geometry, material);
@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   });
 });
+
 
 
 
