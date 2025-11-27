@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     feather.opts.position = {
       x: (Math.random() - 0.5) * 600,
-      y: Math.random() * 200,
+      y: Math.random() * 400 + 100,  // antes 200 → más altura + 100 de offset
       z: (Math.random() - 0.5) * 600,
     };
 
@@ -196,3 +196,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   });
 });
+
