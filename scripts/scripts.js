@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var geometry = new THREE.PlaneGeometry(size, size, 3);
     var material = new THREE.MeshLambertMaterial({
       side: THREE.DoubleSide,
-      map: featherTexture,
+      // map: featherTexture,     // desactivado para ver el color real
       transparent: true,
       color: (i % 2 === 0) ? new THREE.Color("#000000") : new THREE.Color("#c0c0c0"),
       alphaTest: 0.8,
@@ -196,5 +196,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   });
 });
+
 
 
