@@ -1,7 +1,7 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
-      <title>Love - XatSpace</title>
+      <title>Lucy - XatSpace</title>
       <link
          href="https://fonts.googleapis.com/icon?family=Material+Icons"
          rel="stylesheet"
@@ -16,6 +16,8 @@
          
          * {
          box-sizing: border-box;
+         margin: 0;
+         padding: 0;
          }
          
          body {
@@ -32,6 +34,7 @@
          flex-wrap: wrap;
          padding: 20px;
          margin: 0;
+         overflow: hidden; /* ELIMINA EL SCROLL DE LA PÁGINA */
          }
          
          /* ESTRELLAS CAYENDO */
@@ -104,6 +107,13 @@
          flex-direction: column;
          border-radius: 25px;
          box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.3);
+         /* OCULTAR SCROLL DENTRO DE LA CARD (OPCIONAL) */
+         scrollbar-width: none;
+         -ms-overflow-style: none;
+         }
+         
+         .card::-webkit-scrollbar {
+         display: none;
          }
          
          .card[data-state="#about"] {
@@ -487,23 +497,18 @@
          body,html {
          width:100%;
          height:100%;
-         overflow-x: hidden;
-         }
-         
-         canvas {
-         position: absolute;
-         top:0;
-         left:0;
-         z-index: 1;
+         overflow: hidden; /* ELIMINA SCROLL */
          }
       </style>
-      <style type="text/css">* {cursor: url(https://ani.cursors-4u.net/symbols/sym-8/sym733.cur), auto !important;}</style>
+      <style type="text/css">* {cursor: url(https://ani.cursors-4u.net/others/oth-9/oth840.cur), auto !important;}</style>
+      <!-- CARGO THREE.JS, NO EL SCRIPT DE LAS PLUMAS -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
-      <script src="./scripts/scripts.js"></script>
+      <!-- ./scripts/scripts.js QUE CONTENÍA LAS PLUMAS GIRATORIAS -->
    </head>
    <body translate="no">
       <div class="stars-container" id="starsContainer"></div>
-      <canvas id="scene"></canvas>
+      <!-- CANVAS DE THREE.JS PORQUE NO LO NECESITAS (AHÍ ESTABAN LAS PLUMAS) -->
+      
       <div class="card" data-state="#about">
          <div class="card-header">
             <div class="card-cover" style="background-image: url('https://u.cubeupload.com/Hater/header.jpg')"></div>
@@ -514,8 +519,8 @@
          <div class="card-main">
             <div class="card-section is-active" id="about">
                <div class="card-content">
-                  <div class="card-subtitle">WELCOME, STALKER.</div>
-                  <p class="card-desc">❝You probably hate me, huh? It's alright... It's a fact that ninja go through life being hated. If you have power you become alienated and also arrogant.❞</p>
+                  <div class="card-subtitle">Bienvenido.</div>
+                  <p class="card-desc">❝Me gusta ser como soy, no confundas mi personalidad con mi actitud, mi personalidad es quién soy, mi actitud depende de quién seas tú..❞</p>
                   <p style="font-style: italic; text-decoration: underline; color: powderblue; font-size: 11px; text-align: center;"> You Just Don't Have Enough.</p>
                   <p style="text-align: center">☠</p>
                   <div class="card-subtitle" style="font-size: 10px; margin-bottom: 0px; text-align: center;">FROM: HELL • LOCATION: WHO CARES? • PROMISE: <a href="https://xat.me/ApparentlyEmpty" target="_blank" style="color: #ff6b8a;">SHAKA</a></div>
@@ -586,8 +591,10 @@
          </div>
       </div>
       
+      <!-- SCRIPT DE ESTRELLAS + BOTONES -->
       <script>
          (function() {
+             // Efecto de estrellas cayendo
              const starsContainer = document.getElementById('starsContainer');
              
              function createStar() {
@@ -621,10 +628,36 @@
              }
              
              setInterval(createStar, 300);
-             
              for(let i = 0; i < 20; i++) {
                  setTimeout(createStar, i * 100);
              }
+             
+             // BOTONES - cambiar secciones
+             const buttons = document.querySelectorAll('.card-buttons button');
+             const sections = document.querySelectorAll('.card-section');
+             const card = document.querySelector('.card');
+             
+             function handleButtonClick(e) {
+                 const targetSection = this.getAttribute('data-section');
+                 
+                 buttons.forEach(btn => btn.classList.remove('is-active'));
+                 this.classList.add('is-active');
+                 
+                 sections.forEach(section => section.classList.remove('is-active'));
+                 
+                 const activeSection = document.querySelector(targetSection);
+                 if (activeSection) {
+                     activeSection.classList.add('is-active');
+                 }
+                 
+                 if (card) {
+                     card.setAttribute('data-state', targetSection);
+                 }
+             }
+             
+             buttons.forEach(button => {
+                 button.addEventListener('click', handleButtonClick);
+             });
          })();
       </script>
    </body>
